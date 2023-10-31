@@ -4,11 +4,12 @@ import pygame
 class Player(pygame.sprite.Sprite):
     def __init__(self, game_manager):
         super().__init__()
+        self.game_manager = game_manager
         self.image = pygame.image.load("src/assets/player.png")
         self.image = pygame.transform.scale(self.image, (120, 70))
         self.rect = self.image.get_rect()
-        self.rect.x = game_manager.WIDTH / 2
-        self.rect.y = game_manager.HEIGHT / 2
+        self.rect.x = self.game_manager.WIDTH / 2
+        self.rect.y = self.game_manager.HEIGHT / 2
         self.velocity = 5
         self.gravity = 0.1
         self.verticalSpeed = 0
@@ -23,3 +24,10 @@ class Player(pygame.sprite.Sprite):
 
     def bounce(self):
         self.verticalSpeed = -self.velocity
+
+    def check_collide(self, groupe):
+        if pygame.sprite.spritecollideany(self, groupe) or self.rect.y > self.game_manager.HEIGHT - self.game_manager.HEIGHT_BASE:
+            self.game_manager.speed = 0
+            self.verticalSpeed = 0
+            self.gravity = 0
+

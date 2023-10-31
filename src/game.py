@@ -32,6 +32,7 @@ class GameManager:
             self.background.display(self.speed, self.displaysurface)
             self.player.display(self.displaysurface)
             self.pipe_manager.display_group()
+            self.player.check_collide(self.pipe_manager.group)
 
             pygame.display.update()
             self.FramePerSec.tick(120)

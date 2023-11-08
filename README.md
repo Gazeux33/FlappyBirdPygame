@@ -1,3 +1,3 @@
 # FlappyBirdPygame
 
-![Image du jeu](/"image.jpg")
+![Image du jeu](/"flappy.png")

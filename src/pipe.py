@@ -17,6 +17,7 @@ class PipeManager:
 
     def add_pair(self):
         pos = randint(200, self.game_manager.HEIGHT - 200)
+
         self.group.add(PipeDown(self.index, pos, self.game_manager))
         self.group.add(PipeUp(self.index, pos, self, self.game_manager))
         self.index += self.spaceX
@@ -46,7 +47,10 @@ class PipeManager:
 class PipeUp(pygame.sprite.Sprite):
     def __init__(self, x, y, pipe_manager, game_manager):
         super().__init__()
+        print("Tuyaux Haut")
+        print(f"y:{y}")
         self.posy = game_manager.HEIGHT - pipe_manager.spaceY - y
+        print(f"posy/longueur calculée {self.posy}")
         self.image = pygame.image.load("src/assets/pipe.png")
         if self.posy >= 0:
             self.image = pygame.transform.scale(self.image, (self.image.get_width(), self.posy))
@@ -54,12 +58,17 @@ class PipeUp(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = 0
+        print("\n")
 
 
 class PipeDown(pygame.sprite.Sprite):
     def __init__(self, x, y, game_manager):
         super().__init__()
+        print("Tuyaux bas")
+        print(f"y:{y}")
+
         self.longueur_tuyau = y - game_manager.HEIGHT_BASE + 5
+        print(f"longueur calculée {self.longueur_tuyau}")
         self.image = pygame.image.load("src/assets/pipe.png")
         self.image = pygame.transform.scale(self.image, (self.image.get_width(), self.longueur_tuyau))
         self.rect = self.image.get_rect()

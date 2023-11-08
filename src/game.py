@@ -4,6 +4,7 @@ import sys
 from player import Player
 from background import BackGround
 from pipe import PipeManager
+from score import Score
 
 
 class GameManager:
@@ -18,6 +19,7 @@ class GameManager:
         self.background = BackGround()
         self.player = Player(self)
         self.pipe_manager = PipeManager(self)
+        self.score = Score(self)
 
     def play(self):
         while True:
@@ -33,6 +35,7 @@ class GameManager:
             self.player.display(self.displaysurface)
             self.pipe_manager.display_group()
             self.player.check_collide(self.pipe_manager.group)
+            self.score.display_score(self.pipe_manager.score, self.displaysurface)
 
             pygame.display.update()
             self.FramePerSec.tick(120)
